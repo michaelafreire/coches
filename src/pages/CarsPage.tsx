@@ -1,3 +1,4 @@
+import { useMemo, useState } from 'react'
 import { CarGrid } from '../components/ui/CarGrid'
 import { SectionTitle } from '../components/ui/SectionTitle'
 import { cars } from '../data/cars'
@@ -5,6 +6,35 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faMagnifyingGlass } from '@fortawesome/free-solid-svg-icons'
 
 export function CarsPage() {
+  const [selectedBrand, setSelectedBrand] = useState('')
+  const [selectedModel, setSelectedModel] = useState('')
+  const brands = useMemo(
+    () => Array.from(new Set(cars.map((car) => car.marca))).sort(),
+    [],
+  )
+  const models = useMemo(() => {
+    const availableCars = selectedBrand
+      ? cars.filter((car) => car.marca === selectedBrand)
+      : cars
+
+    return Array.from(new Set(availableCars.map((car) => car.modelo))).sort()
+  }, [selectedBrand])
+  const filteredCars = useMemo(
+    () =>
+      cars.filter((car) => {
+        const matchesBrand = selectedBrand ? car.marca === selectedBrand : true
+        const matchesModel = selectedModel ? car.modelo === selectedModel : true
+
+        return matchesBrand && matchesModel
+      }),
+    [selectedBrand, selectedModel],
+  )
+
+  function handleBrandChange(brand: string) {
+    setSelectedBrand(brand)
+    setSelectedModel('')
+  }
+
   return (
     <main className="px-[62px] py-[100px] sm:px-[78px] lg:px-[120px]">
       <SectionTitle>Nuestros coches</SectionTitle>
@@ -12,19 +42,41 @@ export function CarsPage() {
       <div className="mb-15 mt-7 px-0 sm:px-[110px]">
         <h2 className="text-lg font-black">Búsqueda rápida</h2>
         <div className="mt-4 grid gap-4 md:grid-cols-[1fr_1fr_auto]">
-          <select className="rounded-md border border-white-smoke/10 bg-white-smoke/[0.04] px-5 py-4 text-lg text-white-smoke outline-none">
-            <option>Marca</option>
+          <select
+            className="rounded-md border border-white-smoke/10 bg-charcoal px-5 py-4 text-lg text-white-smoke outline-none"
+            onChange={(event) => handleBrandChange(event.target.value)}
+            value={selectedBrand}
+          >
+            <option value="">Marca</option>
+            {brands.map((brand) => (
+              <option key={brand} value={brand}>
+                {brand}
+              </option>
+            ))}
           </select>
-          <select className="rounded-md border border-white-smoke/10 bg-white-smoke/[0.04] px-5 py-4 text-lg text-white-smoke outline-none">
-            <option>Modelo</option>
+          <select
+            className="rounded-md border border-white-smoke/10 bg-charcoal px-5 py-4 text-lg text-white-smoke outline-none"
+            onChange={(event) => setSelectedModel(event.target.value)}
+            value={selectedModel}
+          >
+            <option value="">Modelo</option>
+            {models.map((model) => (
+              <option key={model} value={model}>
+                {model}
+              </option>
+            ))}
           </select>
-          <button className="grid h-12 w-12 place-items-center rounded-md bg-brick-ember text-2xl font-black text-white">
+          <button
+            aria-label="Buscar coches"
+            className="grid h-12 w-12 place-items-center rounded-md bg-brick-ember text-2xl font-black text-white transition hover:bg-oxblood"
+            type="button"
+          >
             <FontAwesomeIcon icon={faMagnifyingGlass} />
           </button>
         </div>
       </div>
 
-      <CarGrid className="mt-8" items={cars} />
+      <CarGrid className="mt-8" items={filteredCars} />
     </main>
   )
 }

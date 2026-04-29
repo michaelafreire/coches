@@ -1,3 +1,4 @@
+import { useEffect, useMemo, useState } from 'react'
 import { CarGrid } from '../components/ui/CarGrid'
 import { cars } from '../data/cars'
 import type { Car } from '../types/car'
@@ -9,6 +10,27 @@ type CarPageProps = {
 export function CarPage({ car }: CarPageProps) {
   const suggestions = cars.filter((item) => item.id !== car.id).slice(0, 3)
   const carName = `${car.marca} ${car.modelo}`
+  const [selectedImage, setSelectedImage] = useState(car.image)
+  const [galleryStart, setGalleryStart] = useState(0)
+  const hasCarousel = car.gallery.length > 3
+  const visibleGallery = useMemo(() => {
+    if (car.gallery.length <= 3) return car.gallery
+
+    return Array.from({ length: 3 }, (_, index) => car.gallery[(galleryStart + index) % car.gallery.length])
+  }, [car.gallery, galleryStart])
+
+  useEffect(() => {
+    setSelectedImage(car.image)
+    setGalleryStart(0)
+  }, [car.id, car.image])
+
+  function showPreviousImages() {
+    setGalleryStart((current) => (current === 0 ? car.gallery.length - 1 : current - 1))
+  }
+
+  function showNextImages() {
+    setGalleryStart((current) => (current + 1) % car.gallery.length)
+  }
 
   return (
     <main className="px-[62px] py-[100px] sm:px-[78px] lg:px-[120px]">
@@ -17,18 +39,49 @@ export function CarPage({ car }: CarPageProps) {
           <img
             alt={carName}
             className="aspect-[1.35] w-full rounded-md object-cover"
-            src={car.image}
+            src={selectedImage}
           />
-          <div className="mt-4 grid grid-cols-4 gap-3">
-            {car.gallery.map((image) => (
-              <img
-                alt=""
-                className="aspect-video rounded-md object-cover"
-                key={image}
-                src={image}
-              />
-            ))}
-          </div>
+          {car.gallery.length > 0 && (
+            <div className="mt-4 flex items-center gap-3">
+              {hasCarousel && (
+                <button
+                  aria-label="Ver fotos anteriores"
+                  className="flex size-11 shrink-0 items-center justify-center rounded-md border border-white-smoke/15 text-2xl font-bold text-white-smoke transition hover:border-brick-ember hover:text-brick-ember"
+                  onClick={showPreviousImages}
+                  type="button"
+                >
+                  ‹
+                </button>
+              )}
+              <div className="grid flex-1 grid-cols-3 gap-3">
+                {visibleGallery.map((image) => (
+                  <button
+                    aria-label="Ver foto en grande"
+                    className={`overflow-hidden rounded-md border transition ${
+                      selectedImage === image
+                        ? 'border-brick-ember'
+                        : 'border-white-smoke/10 hover:border-white-smoke/45'
+                    }`}
+                    key={image}
+                    onClick={() => setSelectedImage(image)}
+                    type="button"
+                  >
+                    <img alt="" className="aspect-video w-full object-cover" src={image} />
+                  </button>
+                ))}
+              </div>
+              {hasCarousel && (
+                <button
+                  aria-label="Ver fotos siguientes"
+                  className="flex size-11 shrink-0 items-center justify-center rounded-md border border-white-smoke/15 text-2xl font-bold text-white-smoke transition hover:border-brick-ember hover:text-brick-ember"
+                  onClick={showNextImages}
+                  type="button"
+                >
+                  ›
+                </button>
+              )}
+            </div>
+          )}
         </div>
 
         <aside className="py-3">

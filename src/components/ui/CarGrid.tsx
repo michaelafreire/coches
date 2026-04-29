@@ -1,3 +1,6 @@
+import type { IconDefinition } from '@fortawesome/fontawesome-svg-core'
+import { faCalendar, faCar, faGear, faHockeyPuck } from '@fortawesome/free-solid-svg-icons'
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import type { Car } from '../../types/car'
 
 type CarGridProps = {
@@ -36,21 +39,23 @@ function CarCard({ car }: { car: Car }) {
           </div>
           <p className="whitespace-nowrap text-lg font-bold">€ {car.precio}</p>
         </div>
-        <div className="mt-5 grid grid-cols-2 gap-3 text-lg text-alabaster">
-          <Spec icon="▣" value={car.year} />
-          <Spec icon="⌁" value={car.kilometraje} />
-          <Spec icon="▤" value={`${car.cilindrada} cilindros`} />
-          <Spec icon="⚙" value={car.transmision} />
+        <div className="mt-5 grid grid-cols-2 gap-3 text-m text-alabaster">
+          <Spec icon={faCalendar} value={car.year} />
+          <Spec icon={faCar} value={car.kilometraje} />
+          <Spec icon={faHockeyPuck} value={`${car.cilindrada} cilindros`} />
+          <Spec icon={faGear} value={car.transmision} />
         </div>
       </div>
     </a>
   )
 }
 
-function Spec({ icon, value }: { icon: string; value: string }) {
+function Spec({ icon, value }: { icon: IconDefinition | string; value: string }) {
   return (
     <span className="flex items-center gap-2">
-      <span className="text-alabaster/55">{icon}</span>
+      <span className="w-5 text-alabaster/55">
+        {typeof icon === 'string' ? icon : <FontAwesomeIcon icon={icon} />}
+      </span>
       {value}
     </span>
   )

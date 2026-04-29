@@ -32,9 +32,9 @@ const carDetails: CarDetails[] = [
     precio: '7.900',
     year: '2017',
     kilometraje: '149.600 km',
-    etiquetaMedioambiental: 'c',
+    etiquetaMedioambiental: 'C',
     cilindrada: '4',
-    transmision: 'MANUAL',
+    transmision: 'Manual',
     motor: '1.000 cc',
   },
   {
@@ -46,7 +46,7 @@ const carDetails: CarDetails[] = [
     kilometraje: '148.000 km',
     etiquetaMedioambiental: 'C',
     cilindrada: '6',
-    transmision: 'AUTOMATICO',
+    transmision: 'Automático',
     motor: '3.000 cc',
   },
   {
@@ -58,7 +58,7 @@ const carDetails: CarDetails[] = [
     kilometraje: '178.000 km',
     etiquetaMedioambiental: 'C',
     cilindrada: '4',
-    transmision: 'AUTOMATICO',
+    transmision: 'Automático',
     motor: '1.800 cc',
   },
   {
@@ -70,7 +70,7 @@ const carDetails: CarDetails[] = [
     kilometraje: '40.500 km',
     etiquetaMedioambiental: 'C',
     cilindrada: '8',
-    transmision: 'AUTOMATICO',
+    transmision: 'Automático',
     motor: '1.333 cc',
   },
   {
@@ -82,7 +82,7 @@ const carDetails: CarDetails[] = [
     kilometraje: '139.700 km',
     etiquetaMedioambiental: 'C',
     cilindrada: '4',
-    transmision: 'MANUAL',
+    transmision: 'Manual',
     motor: '2.200 cc',
   },
   {
@@ -94,7 +94,7 @@ const carDetails: CarDetails[] = [
     kilometraje: '57.500 km',
     etiquetaMedioambiental: 'C',
     cilindrada: '6',
-    transmision: 'AUTOMATICO',
+    transmision: 'Automático',
     motor: '2.700 cc',
   },
   {
@@ -106,7 +106,7 @@ const carDetails: CarDetails[] = [
     kilometraje: '171.300 km',
     etiquetaMedioambiental: 'C',
     cilindrada: '4',
-    transmision: 'MANUAL',
+    transmision: 'Manual',
     motor: '2.000 cc',
   },
   {
@@ -118,7 +118,7 @@ const carDetails: CarDetails[] = [
     kilometraje: '110.000 km',
     etiquetaMedioambiental: 'C',
     cilindrada: '4',
-    transmision: 'MANUAL',
+    transmision: 'Manual',
     motor: '1.600 cc',
   },
   {
@@ -130,7 +130,7 @@ const carDetails: CarDetails[] = [
     kilometraje: '155.000 km',
     etiquetaMedioambiental: 'C',
     cilindrada: '4',
-    transmision: 'MANUAL',
+    transmision: 'Manual',
     motor: '1.600 cc',
   },
 ]
