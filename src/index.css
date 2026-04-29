@@ -1,0 +1,41 @@
+@import url('https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700;900&display=swap');
+@import 'tailwindcss';
+
+@theme {
+  --font-sans: 'Roboto', ui-sans-serif, system-ui, sans-serif;
+
+  --color-night: #000000;
+  --color-graphite: #333333;
+  --color-white-smoke: #f6f6f6;
+  --color-alabaster: #e8e8e8;
+  --color-oxblood: #990100;
+  --color-brick-ember: #b90504;
+}
+
+:root {
+  color: #f6f6f6;
+  background: #000000;
+  font-family: 'Roboto', ui-sans-serif, system-ui, sans-serif;
+  font-synthesis: none;
+  text-rendering: optimizeLegibility;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+html {
+  background: #000000;
+}
+
+body {
+  min-width: 320px;
+  min-height: 100svh;
+  margin: 0;
+  background: #000000;
+}
+
+button,
+input,
+textarea,
+select {
+  font: inherit;
+}
