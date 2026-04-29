@@ -16,29 +16,31 @@ export function CarGrid({ items, className = '' }: CarGridProps) {
 }
 
 function CarCard({ car }: { car: Car }) {
+  const carName = `${car.marca} ${car.modelo}`
+
   return (
     <a
       className="group overflow-hidden rounded-md border border-white-smoke/10 bg-white-smoke/[0.03] transition hover:border-brick-ember/70 hover:bg-white-smoke/[0.06]"
       href={`#/cars/${car.id}`}
     >
       <img
-        alt={car.name}
+        alt={carName}
         className="aspect-[1.55] w-full object-cover transition duration-500 group-hover:scale-105"
         src={car.image}
       />
       <div className="p-4">
         <div className="flex items-start justify-between gap-4">
           <div>
-            <h3 className="text-base font-black">{car.name}</h3>
-            <p className="mt-1 text-lg text-alabaster/55 line-through">€ {car.oldPrice}</p>
+            <h3 className="text-base font-black">{carName}</h3>
+            <p className="mt-1 text-lg text-alabaster/55">{car.etiquetaMedioambiental}</p>
           </div>
-          <p className="whitespace-nowrap text-lg font-bold">€ {car.price}</p>
+          <p className="whitespace-nowrap text-lg font-bold">€ {car.precio}</p>
         </div>
         <div className="mt-5 grid grid-cols-2 gap-3 text-lg text-alabaster">
           <Spec icon="▣" value={car.year} />
-          <Spec icon="⌁" value={car.mileage} />
-          <Spec icon="▤" value={car.fuel} />
-          <Spec icon="⚙" value={car.gearbox} />
+          <Spec icon="⌁" value={car.kilometraje} />
+          <Spec icon="▤" value={`${car.cilindrada} cilindros`} />
+          <Spec icon="⚙" value={car.transmision} />
         </div>
       </div>
     </a>

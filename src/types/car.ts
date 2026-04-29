@@ -1,19 +1,14 @@
 export type Car = {
   id: string
-  name: string
-  price: string
-  oldPrice: string
+  marca: string
+  modelo: string
+  precio: string
   year: string
-  mileage: string
-  fuel: string
-  gearbox: string
-  eco: string
-  displacement: string
-  power: string
-  cylinders: string
-  traction: string
-  engine: string
-  condition: string
+  kilometraje: string
+  etiquetaMedioambiental: string
+  cilindrada: string
+  transmision: string
+  motor: string
   image: string
   gallery: string[]
 }
