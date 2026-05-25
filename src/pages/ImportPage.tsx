@@ -116,6 +116,17 @@ export function ImportPage() {
     [estimate],
   )
   const finalPrice = estimate ? estimate.basePrice + subtotal : 0
+  const quoteWhatsappUrl = estimate
+    ? `https://wa.me/34675988250?text=${encodeURIComponent(
+        [
+          `Hola, me interesa esta cotización aproximada para importar: ${estimate.carName}.`,
+          `Precio base: ${formatEuroAmount(estimate.basePrice)}.`,
+          `Subtotal servicios: ${formatEuroAmount(subtotal)}.`,
+          `Precio final estimado: ${formatEuroAmount(finalPrice)}.`,
+          `Enlace del anuncio: ${carPrompt.trim()}`,
+        ].join('\n'),
+      )}`
+    : ''
 
   async function handleEstimateSubmit(event: FormEvent<HTMLFormElement>) {
     event.preventDefault()
@@ -285,7 +296,9 @@ export function ImportPage() {
               </p>
               <a
                 className="mt-3 inline-flex min-w-64 justify-center rounded-md bg-brick-ember px-7 py-4 font-black text-white transition hover:bg-oxblood"
-                href="#/cars"
+                href={quoteWhatsappUrl}
+                rel="noreferrer"
+                target="_blank"
               >
                 Me interesa
               </a>

@@ -10,6 +10,9 @@ type CarPageProps = {
 export function CarPage({ car }: CarPageProps) {
   const suggestions = cars.filter((item) => item.id !== car.id).slice(0, 3)
   const carName = `${car.marca} ${car.modelo}`
+  const whatsappUrl = `https://wa.me/34675988250?text=${encodeURIComponent(
+    `Hola, me interesa el ${carName}. ¿Me pueden dar más información?`,
+  )}`
   const images = useMemo(() => [car.image, ...car.gallery].filter(Boolean), [car.gallery, car.image])
   const [selectedImageIndex, setSelectedImageIndex] = useState(0)
   const [galleryStart, setGalleryStart] = useState(0)
@@ -131,7 +134,9 @@ export function CarPage({ car }: CarPageProps) {
           </dl>
           <a
             className="mt-8 inline-flex w-full items-center justify-center rounded-md bg-brick-ember px-6 py-4 text-lg font-black text-white transition hover:bg-oxblood"
-            href="#/import"
+            href={whatsappUrl}
+            rel="noreferrer"
+            target="_blank"
           >
             Me interesa
           </a>

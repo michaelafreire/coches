@@ -1,6 +1,7 @@
 import { useEffect, useMemo } from 'react'
 import { Header } from './components/layout/Header'
 import { SiteFooter } from './components/layout/SiteFooter'
+import { FloatingWhatsApp } from './components/ui/FloatingWhatsApp'
 import { cars } from './data/cars'
 import { useHashPath } from './hooks/useHashPath'
 import { CarPage } from './pages/CarPage'
@@ -33,6 +34,7 @@ function App() {
       <Header path={path} />
       {page}
       <SiteFooter />
+      <FloatingWhatsApp />
     </div>
   )
 }
