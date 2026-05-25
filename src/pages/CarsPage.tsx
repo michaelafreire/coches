@@ -3,7 +3,7 @@ import { CarGrid } from '../components/ui/CarGrid'
 import { SectionTitle } from '../components/ui/SectionTitle'
 import { cars } from '../data/cars'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import { faMagnifyingGlass } from '@fortawesome/free-solid-svg-icons'
+import { faChevronDown, faMagnifyingGlass } from '@fortawesome/free-solid-svg-icons'
 
 export function CarsPage() {
   const [selectedBrand, setSelectedBrand] = useState('')
@@ -39,33 +39,45 @@ export function CarsPage() {
     <main className="px-[62px] py-[100px] sm:px-[78px] lg:px-[120px]">
       <SectionTitle>Nuestros coches</SectionTitle>
 
-      <div className="mb-15 mt-7 px-0 sm:px-[110px]">
+      <div className="mb-20 mt-10 px-0 sm:px-[110px]">
         <h2 className="text-lg font-black">Búsqueda rápida</h2>
         <div className="mt-4 grid gap-4 md:grid-cols-[1fr_1fr_auto]">
-          <select
-            className="rounded-md border border-white-smoke/10 bg-charcoal px-5 py-4 text-lg text-white-smoke outline-none"
-            onChange={(event) => handleBrandChange(event.target.value)}
-            value={selectedBrand}
-          >
-            <option value="">Marca</option>
-            {brands.map((brand) => (
-              <option key={brand} value={brand}>
-                {brand}
-              </option>
-            ))}
-          </select>
-          <select
-            className="rounded-md border border-white-smoke/10 bg-charcoal px-5 py-4 text-lg text-white-smoke outline-none"
-            onChange={(event) => setSelectedModel(event.target.value)}
-            value={selectedModel}
-          >
-            <option value="">Modelo</option>
-            {models.map((model) => (
-              <option key={model} value={model}>
-                {model}
-              </option>
-            ))}
-          </select>
+          <div className="relative">
+            <select
+              className="w-full appearance-none rounded-md border border-white-smoke/10 bg-charcoal py-4 pl-5 pr-14 text-lg text-white-smoke outline-none"
+              onChange={(event) => handleBrandChange(event.target.value)}
+              value={selectedBrand}
+            >
+              <option value="">Marca</option>
+              {brands.map((brand) => (
+                <option key={brand} value={brand}>
+                  {brand}
+                </option>
+              ))}
+            </select>
+            <FontAwesomeIcon
+              className="pointer-events-none absolute right-6 top-1/2 -translate-y-1/2 text-sm text-white-smoke"
+              icon={faChevronDown}
+            />
+          </div>
+          <div className="relative">
+            <select
+              className="w-full appearance-none rounded-md border border-white-smoke/10 bg-charcoal py-4 pl-5 pr-14 text-lg text-white-smoke outline-none"
+              onChange={(event) => setSelectedModel(event.target.value)}
+              value={selectedModel}
+            >
+              <option value="">Modelo</option>
+              {models.map((model) => (
+                <option key={model} value={model}>
+                  {model}
+                </option>
+              ))}
+            </select>
+            <FontAwesomeIcon
+              className="pointer-events-none absolute right-6 top-1/2 -translate-y-1/2 text-sm text-white-smoke"
+              icon={faChevronDown}
+            />
+          </div>
           <button
             aria-label="Buscar coches"
             className="grid h-12 w-12 place-items-center rounded-md bg-brick-ember text-2xl font-black text-white transition hover:bg-oxblood"

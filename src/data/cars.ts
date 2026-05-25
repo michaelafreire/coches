@@ -71,7 +71,7 @@ const carDetails: CarDetails[] = [
     etiquetaMedioambiental: 'C',
     cilindrada: '8',
     transmision: 'Automático',
-    motor: '1.333 cc',
+    motor: '4.308 cc',
   },
   {
     id: 'c5',

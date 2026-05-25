@@ -1,4 +1,4 @@
-import { useEffect, useMemo, useState } from 'react'
+import { useMemo, useState } from 'react'
 import { CarGrid } from '../components/ui/CarGrid'
 import { cars } from '../data/cars'
 import type { Car } from '../types/car'
@@ -10,76 +10,104 @@ type CarPageProps = {
 export function CarPage({ car }: CarPageProps) {
   const suggestions = cars.filter((item) => item.id !== car.id).slice(0, 3)
   const carName = `${car.marca} ${car.modelo}`
-  const [selectedImage, setSelectedImage] = useState(car.image)
+  const images = useMemo(() => [car.image, ...car.gallery].filter(Boolean), [car.gallery, car.image])
+  const [selectedImageIndex, setSelectedImageIndex] = useState(0)
   const [galleryStart, setGalleryStart] = useState(0)
-  const hasCarousel = car.gallery.length > 3
+  const hasCarousel = images.length > 1
   const visibleGallery = useMemo(() => {
-    if (car.gallery.length <= 3) return car.gallery
+    if (images.length <= 3) {
+      return images.map((image, imageIndex) => ({ image, imageIndex }))
+    }
 
-    return Array.from({ length: 3 }, (_, index) => car.gallery[(galleryStart + index) % car.gallery.length])
-  }, [car.gallery, galleryStart])
+    return Array.from({ length: 3 }, (_, index) => {
+      const imageIndex = (galleryStart + index) % images.length
 
-  useEffect(() => {
-    setSelectedImage(car.image)
-    setGalleryStart(0)
-  }, [car.id, car.image])
+      return {
+        image: images[imageIndex],
+        imageIndex,
+      }
+    })
+  }, [galleryStart, images])
+  const selectedImage = images[selectedImageIndex] ?? car.image
 
-  function showPreviousImages() {
-    setGalleryStart((current) => (current === 0 ? car.gallery.length - 1 : current - 1))
+  function showPreviousImage() {
+    setSelectedImageIndex((current) => {
+      const nextIndex = current === 0 ? images.length - 1 : current - 1
+
+      setGalleryStart(nextIndex)
+
+      return nextIndex
+    })
   }
 
-  function showNextImages() {
-    setGalleryStart((current) => (current + 1) % car.gallery.length)
+  function showNextImage() {
+    setSelectedImageIndex((current) => {
+      const nextIndex = (current + 1) % images.length
+
+      setGalleryStart(nextIndex)
+
+      return nextIndex
+    })
+  }
+
+  function selectImage(imageIndex: number) {
+    setSelectedImageIndex(imageIndex)
+
+    if (images.length > 3) {
+      setGalleryStart(imageIndex)
+    }
   }
 
   return (
     <main className="px-[62px] py-[100px] sm:px-[78px] lg:px-[120px]">
       <section className="grid gap-7 lg:grid-cols-[1.35fr_0.85fr]">
         <div>
-          <img
-            alt={carName}
-            className="aspect-[1.35] w-full rounded-md object-cover"
-            src={selectedImage}
-          />
-          {car.gallery.length > 0 && (
-            <div className="mt-4 flex items-center gap-3">
-              {hasCarousel && (
+          <div className="relative">
+            <img
+              alt={carName}
+              className="aspect-[1.35] w-full rounded-md object-cover"
+              src={selectedImage}
+            />
+            {hasCarousel && (
+              <>
                 <button
-                  aria-label="Ver fotos anteriores"
-                  className="flex size-11 shrink-0 items-center justify-center rounded-md border border-white-smoke/15 text-2xl font-bold text-white-smoke transition hover:border-brick-ember hover:text-brick-ember"
-                  onClick={showPreviousImages}
+                  aria-label="Ver foto anterior"
+                  className="absolute left-4 top-1/2 flex size-12 -translate-y-1/2 items-center justify-center rounded-md border border-white-smoke/25 bg-night/55 text-3xl font-bold text-white-smoke transition hover:border-brick-ember hover:bg-night/75 hover:text-brick-ember"
+                  onClick={showPreviousImage}
                   type="button"
                 >
                   ‹
                 </button>
-              )}
+                <button
+                  aria-label="Ver foto siguiente"
+                  className="absolute right-4 top-1/2 flex size-12 -translate-y-1/2 items-center justify-center rounded-md border border-white-smoke/25 bg-night/55 text-3xl font-bold text-white-smoke transition hover:border-brick-ember hover:bg-night/75 hover:text-brick-ember"
+                  onClick={showNextImage}
+                  type="button"
+                >
+                  ›
+                </button>
+              </>
+            )}
+          </div>
+          {images.length > 0 && (
+            <div className="mt-4 flex items-center gap-3">
               <div className="grid flex-1 grid-cols-3 gap-3">
-                {visibleGallery.map((image) => (
+                {visibleGallery.map(({ image, imageIndex }) => (
                   <button
                     aria-label="Ver foto en grande"
                     className={`overflow-hidden rounded-md border transition ${
-                      selectedImage === image
+                      selectedImageIndex === imageIndex
                         ? 'border-brick-ember'
                         : 'border-white-smoke/10 hover:border-white-smoke/45'
                     }`}
                     key={image}
-                    onClick={() => setSelectedImage(image)}
+                    onClick={() => selectImage(imageIndex)}
                     type="button"
                   >
                     <img alt="" className="aspect-video w-full object-cover" src={image} />
                   </button>
                 ))}
               </div>
-              {hasCarousel && (
-                <button
-                  aria-label="Ver fotos siguientes"
-                  className="flex size-11 shrink-0 items-center justify-center rounded-md border border-white-smoke/15 text-2xl font-bold text-white-smoke transition hover:border-brick-ember hover:text-brick-ember"
-                  onClick={showNextImages}
-                  type="button"
-                >
-                  ›
-                </button>
-              )}
             </div>
           )}
         </div>

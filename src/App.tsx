@@ -1,4 +1,4 @@
-import { useMemo } from 'react'
+import { useEffect, useMemo } from 'react'
 import { Header } from './components/layout/Header'
 import { SiteFooter } from './components/layout/SiteFooter'
 import { cars } from './data/cars'
@@ -11,6 +11,10 @@ import { ImportPage } from './pages/ImportPage'
 function App() {
   const path = useHashPath()
 
+  useEffect(() => {
+    window.scrollTo({ top: 0, left: 0 })
+  }, [path])
+
   const page = useMemo(() => {
     if (path === '/cars') return <CarsPage />
     if (path === '/import') return <ImportPage />
@@ -18,7 +22,7 @@ function App() {
     const carMatch = path.match(/^\/cars\/(.+)$/)
     if (carMatch) {
       const car = cars.find((item) => item.id === carMatch[1])
-      return <CarPage car={car ?? cars[0]} />
+      return <CarPage car={car ?? cars[0]} key={car?.id ?? cars[0].id} />
     }
 
     return <HomePage />

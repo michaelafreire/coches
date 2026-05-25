@@ -6,10 +6,10 @@ type HeaderProps = {
 
 export function Header({ path }: HeaderProps) {
   return (
-    <header className="flex h-16 items-center justify-between border-b border-white-smoke/10 px-[32px] sm:px-[55px] lg:px-[50px]">
+    <header className="flex min-h-28 items-center justify-between border-b border-white-smoke/10 px-[32px] py-2 sm:px-[55px] lg:px-[50px]">
       <Logo />
 
-      <nav className="flex items-center gap-7 text-lg font-medium">
+      <nav className="flex items-center gap-7 text-m font-medium">
         <NavLink active={path.startsWith('/cars')} href="#/cars">
           Nuestros coches
         </NavLink>

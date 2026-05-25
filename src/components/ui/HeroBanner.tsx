@@ -1,4 +1,5 @@
 import { useState, type CSSProperties, type PointerEvent } from 'react'
+import heroLogo from '../../assets/hero-logo.png'
 
 type HeroBannerProps = {
   image: string
@@ -52,9 +53,15 @@ export function HeroBanner({ image }: HeroBannerProps) {
       <div className="absolute inset-x-0 bottom-0 z-20 h-32 bg-gradient-to-t from-[#090c0f] to-transparent" />
 
       <div className="relative z-30 flex min-h-[520px] max-w-2xl flex-col justify-center px-7 py-16 sm:h-[75svh] sm:px-12">
-        <h1 className="text-6xl font-black leading-none sm:text-7xl">
-          RT
-          <span className="block text-brick-ember sm:text-4xl text-3xl">Premium Cars</span>
+        <h1>
+          <span className="sr-only">RT Premium Motors</span>
+          <img
+            alt=""
+            className="h-auto w-40 max-w-[56vw] object-contain sm:w-[230px]"
+            height="420"
+            src={heroLogo}
+            width="782"
+          />
         </h1>
         <p className="mt-8 max-w-xs text-lg leading-7 text-alabaster">
           15+ años de experiencia en el sector automovilístico.

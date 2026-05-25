@@ -1,11 +1,19 @@
-import { Logo } from '../ui/Logo'
+import footerLogo from '../../assets/hero-logo.png'
 
 export function SiteFooter() {
   return (
     <footer className="border-t border-white-smoke/10 bg-night px-[62px] py-[80px] sm:px-[78px] lg:px-[120px]">
       <div className="grid gap-8 md:grid-cols-[1.4fr_1fr_1fr_1fr]">
         <div>
-          <Logo />
+          <a aria-label="Home" className="inline-flex" href="#/">
+            <img
+              alt="RT Premium Motors"
+              className="h-auto w-28 object-contain"
+              height="214"
+              src={footerLogo}
+              width="400"
+            />
+          </a>
           <p className="mt-5 max-w-md text-lg leading-8 text-alabaster">
             Importación y selección de coches premium con estética sobria,
             atención directa y gestión completa.
@@ -25,20 +33,14 @@ export function SiteFooter() {
         </FooterColumn>
 
         <FooterColumn title="Contacto">
-          <p>Madrid, España</p>
-          <p>+34 600 000 000</p>
-          <p>info@tunaxcars.com</p>
-        </FooterColumn>
-
-        <FooterColumn title="Horario">
-          <p>Lunes a viernes</p>
-          <p>09:00 - 19:00</p>
-          <p>Sábado con cita previa</p>
+          <p>Barcelona, España</p>
+          <p>+34 675 98 82 50</p>
+          <p>info@rtpremiumcars.com</p>
         </FooterColumn>
       </div>
 
       <div className="mt-10 flex flex-col gap-3 border-t border-white-smoke/10 pt-5 text-lg text-alabaster/70 sm:flex-row sm:items-center sm:justify-between">
-        <p>© 2026 Tu Nax. Todos los derechos reservados.</p>
+        <p>© 2026 RT Premium Cars.</p>
         <p>Importa tu coche soñado.</p>
       </div>
     </footer>

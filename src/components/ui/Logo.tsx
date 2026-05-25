@@ -1,11 +1,19 @@
+import logoImage from '../../assets/logo.png'
+
 export function Logo() {
   return (
     <a
       aria-label="Home"
-      className="inline-grid h-8 w-8 place-items-center rounded-sm border border-transparent"
+      className="inline-flex h-24 w-24 items-center justify-center overflow-hidden rounded-full"
       href="#/"
     >
-      <span className="block h-5 w-5 rotate-45 border-4 border-white-smoke" />
+      <img
+        alt="RT Premium Motors"
+        className="h-full w-full object-contain"
+        height="96"
+        src={logoImage}
+        width="96"
+      />
     </a>
   )
 }
