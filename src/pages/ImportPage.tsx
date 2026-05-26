@@ -163,7 +163,7 @@ export function ImportPage() {
   }
 
   return (
-    <main className="px-[62px] py-[100px] sm:px-[78px] lg:px-[120px]">
+    <main className="px-5 py-20 sm:px-10 sm:py-[100px] lg:px-[120px]">
       <SectionTitle>Importa tu coche soñado</SectionTitle>
       <p className="mt-5 max-w-3xl text-lg leading-8 text-alabaster">
         Importamos el coche que buscas de manera segura desde Alemania.
@@ -218,7 +218,7 @@ export function ImportPage() {
           onSubmit={handleEstimateSubmit}
         >
           <input
-            className="min-h-14 min-w-0 flex-1 bg-transparent px-4 text-base text-white-smoke outline-none placeholder:text-alabaster/40 md:text-lg"
+            className="min-h-14 min-w-0 flex-1 bg-transparent px-3 text-base text-white-smoke outline-none placeholder:text-alabaster/40 sm:px-4 md:text-lg"
             id="car-search"
             onChange={(event) => setCarPrompt(event.target.value)}
             placeholder="Pega aquí el enlace del anuncio..."
@@ -227,7 +227,7 @@ export function ImportPage() {
           />
           <button
             aria-label="Calcular estimado"
-            className="grid h-14 w-14 shrink-0 place-items-center rounded-md bg-brick-ember text-2xl font-black text-white transition hover:bg-oxblood disabled:cursor-not-allowed disabled:bg-graphite"
+            className="grid h-14 w-14 shrink-0 place-items-center rounded-md bg-brick-ember text-xl font-black text-white transition hover:bg-oxblood disabled:cursor-not-allowed disabled:bg-graphite sm:text-2xl"
             disabled={isLoading}
             type="submit"
           >
@@ -249,15 +249,34 @@ export function ImportPage() {
 
         {estimate && (
           <>
-            <div className="mt-6 rounded-md border border-white-smoke/10 bg-white-smoke/[0.04] px-5 py-4">
+            <div className="mt-6 rounded-md border border-white-smoke/10 bg-white-smoke/[0.04] px-4 py-4 sm:px-5">
               <p className="text-sm font-black uppercase tracking-[0.12em] text-alabaster/65">
                 Coche calculado
               </p>
-              <h3 className="mt-1 text-2xl font-black text-white-smoke">{estimate.carName}</h3>
+              <h3 className="mt-1 text-2xl font-black text-white-smoke [overflow-wrap:anywhere]">
+                {estimate.carName}
+              </h3>
             </div>
 
-            <div className="mt-6 overflow-hidden rounded-md border border-white-smoke/10">
-              <table className="w-full min-w-[720px] border-collapse text-left text-lg">
+            <div className="mt-6 grid gap-3 md:hidden">
+              {tableRows.map(({ concept, cost, detail }) => (
+                <article
+                  className="rounded-md border border-white-smoke/10 bg-white-smoke/[0.03] p-4"
+                  key={concept}
+                >
+                  <div className="flex items-start justify-between gap-4">
+                    <h4 className="text-base font-black text-white-smoke">{concept}</h4>
+                    <p className="shrink-0 text-base font-black text-white-smoke">
+                      {formatEuroAmount(cost)}
+                    </p>
+                  </div>
+                  <p className="mt-3 text-sm leading-6 text-alabaster/75">{detail}</p>
+                </article>
+              ))}
+            </div>
+
+            <div className="mt-6 hidden overflow-hidden rounded-md border border-white-smoke/10 md:block">
+              <table className="w-full border-collapse text-left text-lg">
                 <thead className="bg-white-smoke/[0.04] text-lg uppercase text-white-smoke">
                   <tr>
                     <th className="border-r border-white-smoke/10 px-5 py-4">Concepto</th>
@@ -283,19 +302,20 @@ export function ImportPage() {
               </table>
             </div>
 
-            <div className="mt-6 flex flex-col items-end gap-3 text-right">
-              <p className="text-lg font-black">
-                SUBTOTAL SERVICIOS: <span className="ml-6">{formatEuroAmount(subtotal)}</span>
+            <div className="mt-6 flex flex-col items-stretch gap-3 text-right sm:items-end">
+              <p className="text-base font-black sm:text-lg">
+                SUBTOTAL SERVICIOS:{' '}
+                <span className="block sm:ml-6 sm:inline">{formatEuroAmount(subtotal)}</span>
               </p>
-              <p className="text-2xl font-black">
+              <p className="text-xl font-black sm:text-2xl">
                 PRECIO FINAL ESTIMADO:{' '}
-                <span className="ml-6">{formatEuroAmount(finalPrice)}</span>
+                <span className="block sm:ml-6 sm:inline">{formatEuroAmount(finalPrice)}</span>
               </p>
               <p className="text-lg text-alabaster/70">
                 (asumiendo precio base {formatEuroAmount(estimate.basePrice)})
               </p>
               <a
-                className="mt-3 inline-flex min-w-64 justify-center rounded-md bg-brick-ember px-7 py-4 font-black text-white transition hover:bg-oxblood"
+                className="mt-3 inline-flex w-full justify-center rounded-md bg-brick-ember px-7 py-4 font-black text-white transition hover:bg-oxblood sm:w-auto sm:min-w-64"
                 href={quoteWhatsappUrl}
                 rel="noreferrer"
                 target="_blank"
