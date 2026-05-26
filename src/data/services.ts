@@ -1,7 +1,7 @@
 export const services = [
   {
     title: 'Importa un coche',
-    description: 'Gestión completa para traer tu coche desde Alemania.',
+    description: 'Gestión completa para traer tu coche desde Europa.',
     href: '#/import',
     icon: 'ship',
   },

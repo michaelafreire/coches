@@ -1,3 +1,11 @@
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+import {
+  faEnvelope,
+  faGlobe,
+  faLocationDot,
+  faPhone,
+  type IconDefinition,
+} from '@fortawesome/free-solid-svg-icons'
 import footerLogo from '../../assets/hero-logo.png'
 
 export function SiteFooter() {
@@ -15,8 +23,7 @@ export function SiteFooter() {
             />
           </a>
           <p className="mt-5 max-w-md text-lg leading-8 text-alabaster">
-            Importación y selección de coches premium con estética sobria,
-            atención directa y gestión completa.
+            Importamos tu próximo coche. De cualquier punto de Europa, con total garantía.
           </p>
         </div>
 
@@ -33,15 +40,16 @@ export function SiteFooter() {
         </FooterColumn>
 
         <FooterColumn title="Contacto">
-          <p>Barcelona, España</p>
-          <p>+34 675 98 82 50</p>
-          <p>info@rtpremiumcars.com</p>
+          <ContactItem icon={faLocationDot}>Barcelona, España</ContactItem>
+          <ContactItem icon={faPhone}>+34 675 98 82 50</ContactItem>
+          <ContactItem icon={faEnvelope}>info@rtpremiumcars.com</ContactItem>
+          <ContactItem icon={faGlobe}>www.rtpremiumcars.com</ContactItem>
         </FooterColumn>
       </div>
 
-      <div className="mt-10 flex flex-col gap-3 border-t border-white-smoke/10 pt-5 text-lg text-alabaster/70 sm:flex-row sm:items-center sm:justify-between">
-        <p>© 2026 RT Premium Cars.</p>
-        <p>Importa tu coche soñado.</p>
+      <div className="mt-10 border-t border-white-smoke/10 pt-5 text-center text-lg leading-7 text-alabaster/80">
+        <p>Profesionalidad. Transparencia. Confianza.</p>
+        <p className="font-black text-brick-ember">RT Premium Motors.</p>
       </div>
     </footer>
   )
@@ -61,5 +69,20 @@ function FooterColumn({
       </h2>
       <div className="mt-4 flex flex-col gap-3 text-lg text-alabaster">{children}</div>
     </div>
+  )
+}
+
+function ContactItem({
+  children,
+  icon,
+}: {
+  children: React.ReactNode
+  icon: IconDefinition
+}) {
+  return (
+    <p className="flex items-center gap-4">
+      <FontAwesomeIcon className="w-5 shrink-0 text-brick-ember" icon={icon} />
+      <span>{children}</span>
+    </p>
   )
 }

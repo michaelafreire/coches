@@ -165,8 +165,15 @@ export function ImportPage() {
   return (
     <main className="px-5 py-20 sm:px-10 sm:py-[100px] lg:px-[120px]">
       <SectionTitle>Importa tu coche soñado</SectionTitle>
-      <p className="mt-5 max-w-3xl text-lg leading-8 text-alabaster">
-        Importamos el coche que buscas de manera segura desde Alemania.
+      <p className="mt-5 text-lg leading-8 text-alabaster">
+        Importamos tu próximo coche. De cualquier punto de Europa, con total garantía.
+      </p>
+      <p className="mt-8 text-lg leading-8 text-alabaster/80">
+        En RT Premium Motors nos encargamos de todo el proceso para que disfrutes de tu
+        vehículo sin preocupaciones. Te ayudamos a escoger la mejor unidad, la revisamos en
+        origen y la traemos a España. Nos ocupamos de la ITV, los impuestos y todos los
+        trámites necesarios para entregarte el coche totalmente registrado en España, con
+        matrículas españolas y listo para conducir.
       </p>
 
       <section className="mt-10">
@@ -189,7 +196,7 @@ export function ImportPage() {
           <div>
             <p className="text-3xl font-black tracking-normal md:text-4xl">Calcula el costo</p>
             <p className="mt-2 max-w-2xl text-base leading-7 text-alabaster/70 md:text-lg">
-              Estimación orientativa para importar un coche desde Alemania.
+              Estimación orientativa para importar un coche desde Europa.
             </p>
           </div>
           <p className="max-w-sm text-sm leading-6 text-alabaster/55 lg:text-right">

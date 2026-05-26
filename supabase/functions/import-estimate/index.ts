@@ -235,7 +235,7 @@ Deno.serve(async (request) => {
         {
           role: 'system',
           content: [
-            'Eres un asesor experto en importacion de coches desde Alemania a Espana.',
+            'Eres un asesor experto en importacion de coches desde Europa a Espana.',
             'Calcula una estimacion orientativa para importar el coche que proporcione el usuario.',
             'Identifica el nombre, marca y modelo del coche y devuelvelo en carName.',
             'Si el usuario proporciona un enlace, usa la herramienta de busqueda web para abrir o localizar ese anuncio y extraer los datos del coche y su precio exacto anunciado.',
