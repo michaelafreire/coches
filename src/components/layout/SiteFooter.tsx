@@ -1,7 +1,6 @@
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import {
   faEnvelope,
-  faGlobe,
   faLocationDot,
   faPhone,
   type IconDefinition,
@@ -23,7 +22,6 @@ export function SiteFooter() {
             />
           </a>
           <p className="mt-5 max-w-md text-lg leading-8 text-alabaster">
-            Importamos tu próximo coche. De cualquier punto de Europa, con total garantía.
           </p>
         </div>
 
@@ -43,7 +41,6 @@ export function SiteFooter() {
           <ContactItem icon={faLocationDot}>Barcelona, España</ContactItem>
           <ContactItem icon={faPhone}>+34 675 98 82 50</ContactItem>
           <ContactItem icon={faEnvelope}>info@rtpremiumcars.com</ContactItem>
-          <ContactItem icon={faGlobe}>www.rtpremiumcars.com</ContactItem>
         </FooterColumn>
       </div>
 

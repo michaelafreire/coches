@@ -1,13 +1,13 @@
 export const services = [
   {
     title: 'Importa un coche',
-    description: 'Gestión completa para traer tu coche desde Europa.',
+    description: 'Importamos y matriculamos tu próximo coche desde cualquier parte de Europa en menos 5 días.',
     href: '#/import',
     icon: 'ship',
   },
   {
     title: 'Nuestros coches',
-    description: 'Stock seleccionado y listo para reservar.',
+    description: 'Listos para conducir.',
     href: '#/cars',
     icon: 'car',
   },

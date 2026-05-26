@@ -166,7 +166,7 @@ export function ImportPage() {
     <main className="px-5 py-20 sm:px-10 sm:py-[100px] lg:px-[120px]">
       <SectionTitle>Importa tu coche soñado</SectionTitle>
       <p className="mt-5 text-lg leading-8 text-alabaster">
-        Importamos tu próximo coche. De cualquier punto de Europa, con total garantía.
+        Importamos y matriculamos tu próximo coche desde cualquier parte de Europa en menos 5 días.
       </p>
       <p className="mt-8 text-lg leading-8 text-alabaster/80">
         En RT Premium Motors nos encargamos de todo el proceso para que disfrutes de tu
